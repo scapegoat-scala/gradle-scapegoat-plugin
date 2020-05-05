@@ -53,3 +53,10 @@ publishing {
         }
     }
 }
+
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
+    // This is the version used in Gradle 5.2
+    kotlinOptions.apiVersion = "1.3"
+
+//    kotlinOptions.allWarningsAsErrors = true
+}

@@ -2,6 +2,7 @@ package com.github.eugenesy.scapegoat
 
 
 class ScapegoatExtension(scapegoatVersion: String,
+                         scalaVersion: String,
                          disabledInspections: Array<String>,
                          runAlways: Boolean,
                          ignoredFiles: Array<String>,

@@ -19,7 +19,7 @@ class GradleScapegoatPluginPluginFunctionalTest {
         projectDir.resolve("settings.gradle").writeText("")
         projectDir.resolve("build.gradle").writeText("""
             plugins {
-                id('com.github.eugenesy.scapegoat.greeting')
+                id('com.github.eugenesy.scapegoat')
             }
         """)
 
@@ -32,6 +32,6 @@ class GradleScapegoatPluginPluginFunctionalTest {
         val result = runner.build()
 
         // Verify the result
-        assertTrue(result.output.contains("Hello from plugin 'com.github.eugenesy.scapegoat.greeting'"))
+        assertTrue(result.output.contains("Hello from plugin 'com.github.eugenesy.scapegoat'"))
     }
 }

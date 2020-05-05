@@ -14,7 +14,7 @@ class GradleScapegoatPluginPluginTest {
     @Test fun `plugin registers task`() {
         // Create a test project and apply the plugin
         val project = ProjectBuilder.builder().build()
-        project.plugins.apply("com.github.eugenesy.scapegoat.greeting")
+        project.plugins.apply("com.github.eugenesy.scapegoat")
 
         // Verify the result
         assertNotNull(project.tasks.findByName("greeting"))

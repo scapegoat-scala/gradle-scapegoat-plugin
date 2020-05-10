@@ -14,11 +14,11 @@ open class ScapegoatExtension(var scapegoatVersion: String,
                               var reports: List<String>,
                               var sourcePrefix: String,
                               var minimalWarnLevel: String) {
-  constructor() : this("1.4.4", "2.12.10", "", ArrayList<String>(), ArrayList<String>(), true, true, arrayListOf("all"), "src/main/scala", "info")
+  constructor() : this(DEFAULT_SCAPEGOAT_VERSION, DEFAULT_SCALA_VERSION, "", ArrayList<String>(), ArrayList<String>(), true, true, arrayListOf(DEFAULT_REPORTS), DEFAULT_SOURCE_PREFIX, DEFAULT_MIN_WARN_LEVEL)
 
   private fun asCompileArg(name: String, value: String): String = "-P:scapegoat:$name:$value"
 
-  fun toCompilerArguments(configuration: Configuration): List<String> {
+  fun buildCompilerArguments(configuration: Configuration): List<String> {
     val arguments: MutableList<String> = ArrayList()
     arguments.add("-Xplugin:${configuration.asPath}")
     arguments.add(asCompileArg(VERBOSE, verbose.toString()))
@@ -39,7 +39,7 @@ open class ScapegoatExtension(var scapegoatVersion: String,
   }
 
   companion object {
-    const val EXTENSION_NAME = "scapegoat"
+    private const val EXTENSION_NAME = "scapegoat"
     const val DATA_DIR = "dataDir"
     const val DISABLED_INSPECTIONS = "disabledInspections"
     const val IGNORED_FILES = "ignoredFiles"
@@ -48,37 +48,48 @@ open class ScapegoatExtension(var scapegoatVersion: String,
     const val REPORTS = "reports"
     const val SOURCE_PREFIX = "sourcePrefix"
     const val MINIMAL_WARN_LEVEL = "minimalWarnLevel"
-  }
-}
 
-object ScapegoatExtensionHelper {
-  private fun <T> resolveValue(project: Project, propertyName: String, defaultValue: T): T {
-    if (project.hasProperty(propertyName)) {
-      return project.property(propertyName) as T
+    const val DEFAULT_SCAPEGOAT_VERSION = "1.4.4"
+    const val DEFAULT_SCALA_VERSION = "2.12.10"
+    const val DEFAULT_REPORTS = "all"
+    const val DEFAULT_SOURCE_PREFIX = "src/main/scala"
+    const val DEFAULT_REPORTS_PATH = "reports/scapegoat"
+    const val DEFAULT_MIN_WARN_LEVEL = "info"
+
+    private fun <T> resolveValue(project: Project, propertyName: String, defaultValue: T): T {
+      if (project.hasProperty(propertyName)) {
+        return project.property(propertyName) as T
+      }
+
+      return defaultValue
     }
 
-    return defaultValue
-  }
+    private fun create(project: Project): ScapegoatExtension {
+      return project.extensions.create(EXTENSION_NAME, ScapegoatExtension::class.java)
+    }
 
-  fun create(project: Project): ScapegoatExtension {
-    return project.extensions.create(ScapegoatExtension.EXTENSION_NAME, ScapegoatExtension::class.java)
-  }
+    fun getExtension(project: Project): ScapegoatExtension {
+      return project.extensions.getByType(ScapegoatExtension::class.java)
+    }
 
-  fun getExtension(project: Project): ScapegoatExtension {
-    return project.extensions.getByType(ScapegoatExtension::class.java)
-  }
+    private fun initialize(project: Project) {
+      val extension = getExtension(project)
+      extension.scapegoatVersion = resolveValue<String>(project, "scapegoatVersion", DEFAULT_SCAPEGOAT_VERSION)
+      extension.scalaVersion = resolveValue<String>(project, "scalaVersion", DEFAULT_SCALA_VERSION)
+      extension.dataDir = resolveValue<String>(project, "dataDir", "${project.buildDir}/${DEFAULT_REPORTS_PATH}")
+      extension.disabledInspections = resolveValue<List<String>>(project, "disabledInspections", ArrayList<String>())
+      extension.ignoredFiles = resolveValue<List<String>>(project, "ignoredFiles", ArrayList<String>())
+      extension.consoleOutput = resolveValue<Boolean>(project, "consoleOutput", true)
+      extension.verbose = resolveValue<Boolean>(project, "verbose", true)
+      extension.reports = resolveValue<List<String>>(project, "reports", arrayListOf(DEFAULT_REPORTS))
+      extension.sourcePrefix = resolveValue<String>(project, "sourcePrefix", DEFAULT_SOURCE_PREFIX)
+      extension.minimalWarnLevel = resolveValue<String>(project, "minimalWarnLevel", DEFAULT_MIN_WARN_LEVEL)
+    }
 
-  fun initialize(project: Project) {
-    val extension = getExtension(project)
-    extension.scapegoatVersion = resolveValue<String>(project, "scapegoatVersion", "1.4.4")
-    extension.scalaVersion = resolveValue<String>(project, "scalaVersion", "2.12.10")
-    extension.dataDir = resolveValue<String>(project, "dataDir", "${project.buildDir}/scapegoat")
-    extension.disabledInspections = resolveValue<List<String>>(project, "disabledInspections", ArrayList<String>())
-    extension.ignoredFiles = resolveValue<List<String>>(project, "ignoredFiles", ArrayList<String>())
-    extension.consoleOutput = resolveValue<Boolean>(project, "consoleOutput", true)
-    extension.verbose = resolveValue<Boolean>(project, "verbose", true)
-    extension.reports = resolveValue<List<String>>(project, "reports", arrayListOf("all"))
-    extension.sourcePrefix = resolveValue<String>(project, "sourcePrefix", "src/main/scala")
-    extension.minimalWarnLevel = resolveValue<String>(project, "minimalWarnLevel", "info")
+    fun apply(project: Project): ScapegoatExtension {
+      val ext = create(project)
+      initialize(project)
+      return ext
+    }
   }
 }

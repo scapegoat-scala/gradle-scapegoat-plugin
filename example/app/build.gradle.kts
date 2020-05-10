@@ -39,6 +39,6 @@ buildscript {
 }
 apply(plugin = "com.github.eugenesy.scapegoat")
 
-//configure<com.github.eugenesy.scapegoat.ScapegoatExtension>  {
-//    reports = arrayListOf("html")
-//}
+configure<com.github.eugenesy.scapegoat.ScapegoatExtension>  {
+    reports = arrayListOf("html")
+}

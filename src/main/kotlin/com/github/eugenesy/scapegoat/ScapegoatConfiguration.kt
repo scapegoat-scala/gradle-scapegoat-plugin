@@ -15,10 +15,10 @@ object ScapegoatConfiguration {
       it.isCanBeResolved = true
     }
 
-    val scalaVersion = "2.12"
-    val scapegoatVersion = "1.3.3"
+    val ext = ScapegoatExtensionHelper.create(project)
+    ScapegoatExtensionHelper.initialize(project)
 
-    val scapegoat = "com.sksamuel.scapegoat:scalac-scapegoat-plugin_${scalaVersion}:${scapegoatVersion}"
+    val scapegoat = "com.sksamuel.scapegoat:scalac-scapegoat-plugin_${ext.scalaVersion}:${ext.scapegoatVersion}"
     val scapegoatDependency = project.dependencies.create(scapegoat)
     scapegoatConfig.dependencies.add(scapegoatDependency)
     return scapegoatConfig

@@ -19,7 +19,7 @@ repositories {
 //val scalaCompilerPlugin by configurations.creating
 
 dependencies {
-    implementation("org.scala-lang:scala-library:2.12.8")
+    implementation("org.scala-lang:scala-library:2.12.10")
 //    scalaCompilerPlugin("com.sksamuel.scapegoat:scalac-scapegoat-plugin_2.12:1.3.3")
 }
 
@@ -39,10 +39,6 @@ buildscript {
 }
 apply(plugin = "com.github.eugenesy.scapegoat")
 
-//val params: ArrayList<String> = ArrayList()
-//params.add("-Xplugin:${scalaCompilerPlugin.asPath}")
-//params.add("-P:scapegoat:dataDir:$buildDir/scapegoat")
-
-tasks.withType<ScalaCompile>() {
-//    scalaCompileOptions.additionalParameters = params
-}
+//configure<com.github.eugenesy.scapegoat.ScapegoatExtension>  {
+//    reports = arrayListOf("html")
+//}

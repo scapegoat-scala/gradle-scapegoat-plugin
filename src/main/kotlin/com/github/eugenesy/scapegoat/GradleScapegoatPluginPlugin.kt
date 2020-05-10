@@ -32,6 +32,7 @@ class GradleScapegoatPluginPlugin : Plugin<Project> {
     }
 
     val scapegoatConfiguration = ScapegoatConfiguration.apply(project)
+    val props = ScapegoatExtensionHelper.getExtension(project)
 
     // Register a task
     project.tasks.register("greeting") { task ->
@@ -40,11 +41,17 @@ class GradleScapegoatPluginPlugin : Plugin<Project> {
       }
     }
 
-    val props = ArrayList<String>()
-    props.add("-Xplugin:" + scapegoatConfiguration.asPath)
-    props.add("-P:scapegoat:dataDir:" + project.buildDir + "/scapegoat")
+    project.tasks.register("props") { task ->
+      task.doLast {
+        println("=====")
+        println(props.toCompilerArguments(scapegoatConfiguration).joinToString())
+        println("=====")
+      }
+    }
+
+
     project.tasks.withType(ScalaCompile::class.java).configureEach {
-      it.scalaCompileOptions.additionalParameters = props
+      it.scalaCompileOptions.additionalParameters = props.toCompilerArguments(scapegoatConfiguration)
     }
   }
 

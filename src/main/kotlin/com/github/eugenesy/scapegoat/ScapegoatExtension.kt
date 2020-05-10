@@ -40,6 +40,8 @@ open class ScapegoatExtension(var scapegoatVersion: String,
 
   companion object {
     private const val EXTENSION_NAME = "scapegoat"
+    const val SCAPEGOAT_VERSION = "scapegoatVersion"
+    const val SCALA_VERSION = "scalaVersion"
     const val DATA_DIR = "dataDir"
     const val DISABLED_INSPECTIONS = "disabledInspections"
     const val IGNORED_FILES = "ignoredFiles"
@@ -74,16 +76,16 @@ open class ScapegoatExtension(var scapegoatVersion: String,
 
     private fun initialize(project: Project) {
       val extension = getExtension(project)
-      extension.scapegoatVersion = resolveValue<String>(project, "scapegoatVersion", DEFAULT_SCAPEGOAT_VERSION)
-      extension.scalaVersion = resolveValue<String>(project, "scalaVersion", DEFAULT_SCALA_VERSION)
-      extension.dataDir = resolveValue<String>(project, "dataDir", "${project.buildDir}/${DEFAULT_REPORTS_PATH}")
-      extension.disabledInspections = resolveValue<List<String>>(project, "disabledInspections", ArrayList<String>())
-      extension.ignoredFiles = resolveValue<List<String>>(project, "ignoredFiles", ArrayList<String>())
-      extension.consoleOutput = resolveValue<Boolean>(project, "consoleOutput", true)
-      extension.verbose = resolveValue<Boolean>(project, "verbose", true)
-      extension.reports = resolveValue<List<String>>(project, "reports", arrayListOf(DEFAULT_REPORTS))
-      extension.sourcePrefix = resolveValue<String>(project, "sourcePrefix", DEFAULT_SOURCE_PREFIX)
-      extension.minimalWarnLevel = resolveValue<String>(project, "minimalWarnLevel", DEFAULT_MIN_WARN_LEVEL)
+      extension.scapegoatVersion = resolveValue<String>(project, SCAPEGOAT_VERSION, DEFAULT_SCAPEGOAT_VERSION)
+      extension.scalaVersion = resolveValue<String>(project, SCALA_VERSION, DEFAULT_SCALA_VERSION)
+      extension.dataDir = resolveValue<String>(project, DATA_DIR, "${project.buildDir}/${DEFAULT_REPORTS_PATH}")
+      extension.disabledInspections = resolveValue<List<String>>(project, DISABLED_INSPECTIONS, ArrayList<String>())
+      extension.ignoredFiles = resolveValue<List<String>>(project, IGNORED_FILES, ArrayList<String>())
+      extension.consoleOutput = resolveValue<Boolean>(project, CONSOLE_OUTPUT, true)
+      extension.verbose = resolveValue<Boolean>(project, VERBOSE, true)
+      extension.reports = resolveValue<List<String>>(project, REPORTS, arrayListOf(DEFAULT_REPORTS))
+      extension.sourcePrefix = resolveValue<String>(project, SOURCE_PREFIX, DEFAULT_SOURCE_PREFIX)
+      extension.minimalWarnLevel = resolveValue<String>(project, MINIMAL_WARN_LEVEL, DEFAULT_MIN_WARN_LEVEL)
     }
 
     fun apply(project: Project): ScapegoatExtension {

@@ -1,6 +1,8 @@
 # Gradle Scapegoat Plugin
 
-Gradle plugin enables simple configuration of [Scapegoat](https://github.com/sksamuel/scapegoat) Scala linter.
+[![CircleCI](https://circleci.com/gh/eugene-sy/gradle-scapegoat-plugin.svg?style=shield)](https://circleci.com/gh/eugene-sy/gradle-scapegoat-plugin)
+
+Gradle plugin enables simple configuration of [Scapegoat](https://github.com/sksamuel/scapegoat) Scala static code analysis tool.
 The plugin provides default values for the linter allowing to overwrite them. 
 
 ## License

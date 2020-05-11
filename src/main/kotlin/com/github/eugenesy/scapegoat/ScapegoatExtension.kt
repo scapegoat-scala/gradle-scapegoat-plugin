@@ -18,6 +18,8 @@ open class ScapegoatExtension(var scapegoatVersion: String,
 
   private fun asCompileArg(name: String, value: String): String = "-P:scapegoat:$name:$value"
 
+  private fun asCompileArg(name: String, value: List<String>): String = "-P:scapegoat:$name:${value.joinToString(separator = ",")}"
+
   fun buildCompilerArguments(configuration: Configuration): List<String> {
     val arguments: MutableList<String> = ArrayList()
     arguments.add("-Xplugin:${configuration.asPath}")
@@ -25,13 +27,13 @@ open class ScapegoatExtension(var scapegoatVersion: String,
     arguments.add(asCompileArg(CONSOLE_OUTPUT, consoleOutput.toString()))
     arguments.add(asCompileArg(DATA_DIR, dataDir))
     if (disabledInspections.isNotEmpty()) {
-      arguments.add(asCompileArg(DISABLED_INSPECTIONS, disabledInspections.joinToString(separator = ",")))
+      arguments.add(asCompileArg(DISABLED_INSPECTIONS, disabledInspections))
     }
     if (ignoredFiles.isNotEmpty()) {
-      arguments.add(asCompileArg(IGNORED_FILES, ignoredFiles.joinToString(separator = ",")))
+      arguments.add(asCompileArg(IGNORED_FILES, ignoredFiles))
     }
     if (reports.isNotEmpty()) {
-      arguments.add(asCompileArg(REPORTS, reports.joinToString(separator = ",")))
+      arguments.add(asCompileArg(REPORTS, reports))
     }
     arguments.add(asCompileArg(SOURCE_PREFIX, sourcePrefix))
     arguments.add(asCompileArg(MINIMAL_WARN_LEVEL, minimalWarnLevel))

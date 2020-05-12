@@ -5,6 +5,7 @@ plugins {
     `maven-publish`
 
     id("org.jetbrains.kotlin.jvm") version "1.3.41"
+    id("org.jlleitschuh.gradle.ktlint") version "9.2.1"
 }
 
 repositories {
@@ -58,5 +59,11 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach 
     // This is the version used in Gradle 5.2
     kotlinOptions.apiVersion = "1.3"
 
-//    kotlinOptions.allWarningsAsErrors = true
+    kotlinOptions.allWarningsAsErrors = true
+}
+
+ktlint {
+    version.set("0.36.0")
+    enableExperimentalRules.set(true)
+    outputToConsole.set(true)
 }

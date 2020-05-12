@@ -1,11 +1,12 @@
 group = "com.github.eugenesy.scapegoat"
+version = "0.1.0"
 
 plugins {
     `java-gradle-plugin`
-    `maven-publish`
 
     id("org.jetbrains.kotlin.jvm") version "1.3.41"
     id("org.jlleitschuh.gradle.ktlint") version "9.2.1"
+    id("com.gradle.plugin-publish") version "0.11.0"
 }
 
 repositories {
@@ -26,6 +27,7 @@ gradlePlugin {
     val scapegoat by plugins.creating {
         id = "com.github.eugenesy.scapegoat"
         implementationClass = "com.github.eugenesy.scapegoat.GradleScapegoatPluginPlugin"
+        displayName = "Gradle Scapegoat Plugin"
     }
 }
 
@@ -43,18 +45,6 @@ val check by tasks.getting(Task::class) {
     dependsOn(functionalTest)
 }
 
-publishing {
-    publications {
-        create<MavenPublication>("maven") {
-            groupId = "com.github.eugenesy.scapegoat"
-            artifactId = "gradle-scapegoat-plugin"
-            version = "1.0"
-
-            from(components["java"])
-        }
-    }
-}
-
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
     // This is the version used in Gradle 5.2
     kotlinOptions.apiVersion = "1.3"
@@ -66,4 +56,16 @@ ktlint {
     version.set("0.36.0")
     enableExperimentalRules.set(true)
     outputToConsole.set(true)
+}
+
+pluginBundle {
+    website = "https://github.com/eugene-sy/gradle-scapegoat-plugin"
+    vcsUrl = "https://github.com/eugene-sy/gradle-scapegoat-plugin"
+    description = "Gradle plugin for Scapegoat Scala compiler static analysis plugin "
+    tags = listOf("scala", "scalac", "scapegoat")
+
+    mavenCoordinates {
+        groupId = project.group.toString()
+        artifactId = project.name
+    }
 }

@@ -1,0 +1,32 @@
+buildscript {
+  repositories {
+    mavenLocal()
+  }
+  dependencies {
+    classpath("com.github.eugenesy.scapegoat:gradle-scapegoat-plugin:1.0")
+  }
+}
+
+plugins {
+  id 'java'
+  id 'application'
+  id 'scala'
+}
+
+repositories {
+  jcenter()
+}
+
+dependencies {
+  implementation("org.scala-lang:scala-library:2.12.10")
+}
+
+application {
+  mainClassName = "com.github.eugenesy.scapegoat.example.app.App"
+}
+
+apply plugin: 'com.github.eugenesy.scapegoat'
+
+scapegoat {
+  reports = ["html"]
+}

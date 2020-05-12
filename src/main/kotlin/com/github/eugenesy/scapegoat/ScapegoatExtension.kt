@@ -61,8 +61,8 @@ open class ScapegoatExtension(
         const val DEFAULT_REPORTS_PATH = "reports/scapegoat"
         const val DEFAULT_MIN_WARN_LEVEL = "info"
 
-        private fun <T> resolveValue(project: Project, propertyName: String, defaultValue: T): T {
-            if (project.hasProperty(propertyName)) {
+        private inline fun <reified T> resolveValue(project: Project, propertyName: String, defaultValue: T): T {
+            if (project.hasProperty(propertyName) && project.property(propertyName) is T) {
                 return project.property(propertyName) as T
             }
 

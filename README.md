@@ -2,8 +2,84 @@
 
 [![CircleCI](https://circleci.com/gh/eugene-sy/gradle-scapegoat-plugin.svg?style=shield)](https://circleci.com/gh/eugene-sy/gradle-scapegoat-plugin)
 
-Gradle plugin enables simple configuration of [Scapegoat](https://github.com/sksamuel/scapegoat) Scala static code analysis tool.
+Gradle plugin enables a simple configuration of [Scapegoat](https://github.com/sksamuel/scapegoat) Scala static code analysis tool.
 The plugin provides default values for the linter allowing to overwrite them. 
+
+## Configuration
+
+To enable the plugin in the Gradle script:
+* add a plugin in the `plugins` section of configuration file;
+* add plugin configuration section, if parameters have to be overwritten.
+
+Configuration options are:
+* `scapegoatVersion` - version of the Scapegoat Scala compiler plugin, highly suggested adding;
+* `scalaVersion` - version of Scala runtime library, highly suggested adding;  
+* `dataDir` - Scapegoat reports directory, optional, default value: `${buildDir}/reports/scapegoat`;
+* `disabledInspections` - list of disabled inspections, optional, default value: empty list;
+* `ignoredFiles` - list of ignored files, optional, default value: empty list;
+* `consoleOutput` - a flag enabling console output of the compiler plugin, optional, default value: `true`
+* `verbose` - a flag enabling verbose output of the compiler plugin, optional, default value: `true`
+* `reports` - list of report types created during compilation, optional, default value: `all`
+* `sourcePrefix` - , optional, default value: `src/main/scala`
+* `minimalWarnLevel` - minimal level of inspections added to the report, optional, default value: `info`. 
+
+For the full list of available inspections, check the corresponding [Scapegoat README section](https://github.com/sksamuel/scapegoat#inspections).
+
+For the full list of available compiler options, check [compiler flag section](https://github.com/sksamuel/scapegoat#full-list-of-compiler-flags).
+
+Example configuration:
+
+```groovy
+plugins {
+  id "com.github.eugenesy.scapegoat" version "0.1.3"
+}
+
+scapegoat {
+  scapegoatVersion = "1.4.4"
+  scalaVersion = "2.12.10"
+  dataDir = "${buildDir}/reports/scapegoat"
+  disabledInspections = []
+  ignoredFiles = []
+  consoleOutput = true
+  verbose = true
+  reports = ["html", "xml"]
+  sourcePrefix = "src/main/scala"
+  minimalWarnLevel = "info"
+}
+```
+
+```kotlin
+plugins {
+  id("com.github.eugenesy.scapegoat") version "0.1.3"
+}
+
+configure<com.github.eugenesy.scapegoat.ScapegoatExtension>  {
+    scapegoatVersion = "1.4.4"
+    scalaVersion = "2.12.10"
+    dataDir = "${buildDir}/reports/scapegoat"
+    disabledInspections = arrayListOf("ArrayEquals", "AvoidToMinusOne")
+    ignoredFiles = emptyArray<String>().toList()
+    consoleOutput = true
+    verbose = true
+    reports = arrayListOf<String>("html", "xml")
+    sourcePrefix = "src/main/scala"
+    minimalWarnLevel = "info"
+}
+```
+
+For more details, check [examples](./example).
+
+## Changelog
+
+#### 0.1.3
+
+* Fixed a problem with multiple-value parameters, e.g. `reports`. 
+    Now multiple values do not break compilation step because of wrong parameter formatting.
+* Improved examples
+
+#### 0.1.0
+
+The initial release of the plugin. 
 
 ## License
   

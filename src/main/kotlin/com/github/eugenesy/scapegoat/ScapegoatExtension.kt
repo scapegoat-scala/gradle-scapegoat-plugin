@@ -19,7 +19,7 @@ open class ScapegoatExtension(
 
     private fun asCompileArg(name: String, value: String): String = "-P:scapegoat:$name:$value"
 
-    private fun asCompileArg(name: String, value: List<String>): String = "-P:scapegoat:$name:${value.joinToString(separator = ",")}"
+    private fun asCompileArg(name: String, value: List<String>): String = "-P:scapegoat:$name:${value.joinToString(separator = ":")}"
 
     fun buildCompilerArguments(configuration: Configuration): List<String> {
         val arguments: MutableList<String> = ArrayList()

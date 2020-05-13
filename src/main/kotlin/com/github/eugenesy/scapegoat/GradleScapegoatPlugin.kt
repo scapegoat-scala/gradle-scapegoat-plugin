@@ -5,7 +5,7 @@ import org.gradle.api.Project
 import org.gradle.api.tasks.scala.ScalaCompile
 import org.gradle.util.GradleVersion
 
-class GradleScapegoatPluginPlugin : Plugin<Project> {
+class GradleScapegoatPlugin : Plugin<Project> {
     companion object {
         const val PLUGIN_ID = "com.github.eugenesy.scapegoat"
         const val MIN_VERSION = "5.2"

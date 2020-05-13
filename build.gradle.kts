@@ -1,5 +1,5 @@
 group = "com.github.eugenesy.scapegoat"
-version = "0.1.0"
+version = "0.1.3"
 
 plugins {
     `java-gradle-plugin`
@@ -26,7 +26,7 @@ dependencies {
 gradlePlugin {
     val scapegoat by plugins.creating {
         id = "com.github.eugenesy.scapegoat"
-        implementationClass = "com.github.eugenesy.scapegoat.GradleScapegoatPluginPlugin"
+        implementationClass = "com.github.eugenesy.scapegoat.GradleScapegoatPlugin"
         displayName = "Gradle Scapegoat Plugin"
     }
 }

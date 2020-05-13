@@ -33,7 +33,7 @@ class ScapegoatExtensionTest {
         project.buildscript.repositories.add(project.repositories.jcenter())
         val cfg = project.buildscript.configurations.findByName("scalaScapegoatCompilerPlugin")!!
         val args = ext.buildCompilerArguments(cfg)
-        assertTrue(args.contains("-P:scapegoat:disabledInspections:${inspections.joinToString(separator = ",")}"), "disabledInspections are not converted correctly")
+        assertTrue(args.contains("-P:scapegoat:disabledInspections:${inspections.joinToString(separator = ":")}"), "disabledInspections are not converted correctly")
     }
 
     @Test
@@ -47,7 +47,7 @@ class ScapegoatExtensionTest {
         project.buildscript.repositories.add(project.repositories.jcenter())
         val cfg = project.buildscript.configurations.findByName("scalaScapegoatCompilerPlugin")!!
         val args = ext.buildCompilerArguments(cfg)
-        assertTrue(args.contains("-P:scapegoat:ignoredFiles:${ignoredFiles.joinToString(separator = ",")}"), "ignoredFiles are not converted correctly")
+        assertTrue(args.contains("-P:scapegoat:ignoredFiles:${ignoredFiles.joinToString(separator = ":")}"), "ignoredFiles are not converted correctly")
     }
 
     @Test
@@ -61,6 +61,7 @@ class ScapegoatExtensionTest {
         project.buildscript.repositories.add(project.repositories.jcenter())
         val cfg = project.buildscript.configurations.findByName("scalaScapegoatCompilerPlugin")!!
         val args = ext.buildCompilerArguments(cfg)
-        assertTrue(args.contains("-P:scapegoat:reports:${reports.joinToString(separator = ",")}"), "reports are not converted correctly")
+        println(args)
+        assertTrue(args.contains("-P:scapegoat:reports:${reports.joinToString(separator = ":")}"), "reports are not converted correctly")
     }
 }

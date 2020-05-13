@@ -5,7 +5,7 @@ import kotlin.test.assertNotNull
 import kotlin.test.assertTrue
 import org.gradle.testfixtures.ProjectBuilder
 
-class GradleScapegoatPluginPluginTest {
+class GradleScapegoatPluginTest {
     @Test
     fun `plugin registers configuration`() {
         val project = ProjectBuilder.builder().build()

@@ -17,6 +17,7 @@ class GradleScapegoatPlugin : Plugin<Project> {
         }
 
         val ext = ScapegoatExtension.apply(project)
+
         project.afterEvaluate {
             val scapegoatConfiguration = ScapegoatConfiguration.apply(project, ext)
 

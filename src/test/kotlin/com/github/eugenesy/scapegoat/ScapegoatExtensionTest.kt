@@ -1,7 +1,7 @@
 package com.github.eugenesy.scapegoat
 
-import org.gradle.api.internal.project.ProjectInternal
 import kotlin.test.assertTrue
+import org.gradle.api.internal.project.ProjectInternal
 import org.gradle.testfixtures.ProjectBuilder
 import org.junit.Test
 

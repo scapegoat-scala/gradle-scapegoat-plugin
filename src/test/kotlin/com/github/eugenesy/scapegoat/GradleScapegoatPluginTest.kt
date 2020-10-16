@@ -1,9 +1,9 @@
 package com.github.eugenesy.scapegoat
 
-import org.gradle.api.internal.project.ProjectInternal
 import kotlin.test.Test
 import kotlin.test.assertNotNull
 import kotlin.test.assertTrue
+import org.gradle.api.internal.project.ProjectInternal
 import org.gradle.testfixtures.ProjectBuilder
 
 class GradleScapegoatPluginTest {

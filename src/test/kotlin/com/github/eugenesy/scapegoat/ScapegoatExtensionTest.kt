@@ -1,5 +1,6 @@
 package com.github.eugenesy.scapegoat
 
+import org.gradle.api.internal.project.ProjectInternal
 import kotlin.test.assertTrue
 import org.gradle.testfixtures.ProjectBuilder
 import org.junit.Test
@@ -12,6 +13,8 @@ class ScapegoatExtensionTest {
         project.repositories.add(project.repositories.jcenter())
         project.plugins.apply("com.github.eugenesy.scapegoat")
         project.buildscript.repositories.add(project.repositories.jcenter())
+        (project as ProjectInternal).evaluate()
+
         val cfg = project.buildscript.configurations.findByName("scalaScapegoatCompilerPlugin")!!
         val args = ext.buildCompilerArguments(cfg)
         assertTrue(args.contains("-Xplugin:${cfg.asPath}"), "Does not contain Scapegoat classpath")
@@ -29,8 +32,10 @@ class ScapegoatExtensionTest {
         ext.disabledInspections = inspections
         val project = ProjectBuilder.builder().build()
         project.repositories.add(project.repositories.jcenter())
-        project.plugins.apply("com.github.eugenesy.scapegoat")
+        project.pluginManager.apply("com.github.eugenesy.scapegoat")
         project.buildscript.repositories.add(project.repositories.jcenter())
+        (project as ProjectInternal).evaluate()
+
         val cfg = project.buildscript.configurations.findByName("scalaScapegoatCompilerPlugin")!!
         val args = ext.buildCompilerArguments(cfg)
         assertTrue(args.contains("-P:scapegoat:disabledInspections:${inspections.joinToString(separator = ":")}"), "disabledInspections are not converted correctly")
@@ -45,6 +50,8 @@ class ScapegoatExtensionTest {
         project.repositories.add(project.repositories.jcenter())
         project.plugins.apply("com.github.eugenesy.scapegoat")
         project.buildscript.repositories.add(project.repositories.jcenter())
+        (project as ProjectInternal).evaluate()
+
         val cfg = project.buildscript.configurations.findByName("scalaScapegoatCompilerPlugin")!!
         val args = ext.buildCompilerArguments(cfg)
         assertTrue(args.contains("-P:scapegoat:ignoredFiles:${ignoredFiles.joinToString(separator = ":")}"), "ignoredFiles are not converted correctly")
@@ -59,6 +66,8 @@ class ScapegoatExtensionTest {
         project.repositories.add(project.repositories.jcenter())
         project.plugins.apply("com.github.eugenesy.scapegoat")
         project.buildscript.repositories.add(project.repositories.jcenter())
+        (project as ProjectInternal).evaluate()
+
         val cfg = project.buildscript.configurations.findByName("scalaScapegoatCompilerPlugin")!!
         val args = ext.buildCompilerArguments(cfg)
         println(args)

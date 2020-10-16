@@ -36,7 +36,6 @@ open class ScapegoatExtension(
         }
         arguments.add(asCompileArg(SOURCE_PREFIX, sourcePrefix))
         arguments.add(asCompileArg(MINIMAL_WARN_LEVEL, minimalWarnLevel))
-        println(arguments)
         return arguments
     }
 
@@ -79,9 +78,7 @@ open class ScapegoatExtension(
         }
 
         private fun initialize(project: Project) {
-            println(project)
             val extension = getExtension(project)
-            println(extension)
             extension.scapegoatVersion = resolveValue<String>(project, SCAPEGOAT_VERSION, DEFAULT_SCAPEGOAT_VERSION)
             extension.scalaVersion = resolveValue<String>(project, SCALA_VERSION, DEFAULT_SCALA_VERSION)
             extension.dataDir = resolveValue<String>(project, DATA_DIR, "${project.buildDir}/$DEFAULT_REPORTS_PATH")

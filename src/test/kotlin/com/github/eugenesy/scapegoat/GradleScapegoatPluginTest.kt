@@ -1,5 +1,6 @@
 package com.github.eugenesy.scapegoat
 
+import org.gradle.api.internal.project.ProjectInternal
 import kotlin.test.Test
 import kotlin.test.assertNotNull
 import kotlin.test.assertTrue
@@ -10,6 +11,7 @@ class GradleScapegoatPluginTest {
     fun `plugin registers configuration`() {
         val project = ProjectBuilder.builder().build()
         project.plugins.apply("com.github.eugenesy.scapegoat")
+        (project as ProjectInternal).evaluate()
 
         val cfg = project.buildscript.configurations.findByName("scalaScapegoatCompilerPlugin")
         assertNotNull(cfg, "Configuration is not created")
@@ -22,6 +24,8 @@ class GradleScapegoatPluginTest {
         val ext = project.extensions.getByType(ScapegoatExtension::class.java)
         val scapegoat = "com.sksamuel.scapegoat:scalac-scapegoat-plugin_${ext.scalaVersion}:${ext.scapegoatVersion}"
         val scapegoatDependency = project.dependencies.create(scapegoat)
+
+        (project as ProjectInternal).evaluate()
         val cfg = project.buildscript.configurations.findByName("scalaScapegoatCompilerPlugin")
 
         val contains = cfg?.dependencies?.contains(scapegoatDependency)

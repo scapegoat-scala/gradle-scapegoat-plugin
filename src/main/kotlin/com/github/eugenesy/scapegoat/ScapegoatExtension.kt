@@ -4,19 +4,17 @@ import org.gradle.api.Project
 import org.gradle.api.artifacts.Configuration
 
 open class ScapegoatExtension(
-    var scapegoatVersion: String,
-    var scalaVersion: String,
-    var dataDir: String,
-    var disabledInspections: List<String>,
-    var ignoredFiles: List<String>,
-    var consoleOutput: Boolean,
-    var verbose: Boolean,
-    var reports: List<String>,
-    var sourcePrefix: String,
-    var minimalWarnLevel: String
+    var scapegoatVersion: String = DEFAULT_SCAPEGOAT_VERSION,
+    var scalaVersion: String = DEFAULT_SCALA_VERSION,
+    var dataDir: String = "",
+    var disabledInspections: List<String> = ArrayList<String>(),
+    var ignoredFiles: List<String> = ArrayList<String>(),
+    var consoleOutput: Boolean = true,
+    var verbose: Boolean = true,
+    var reports: List<String> = arrayListOf(DEFAULT_REPORTS),
+    var sourcePrefix: String = DEFAULT_SOURCE_PREFIX,
+    var minimalWarnLevel: String = DEFAULT_MIN_WARN_LEVEL
 ) {
-    constructor() : this(DEFAULT_SCAPEGOAT_VERSION, DEFAULT_SCALA_VERSION, "", ArrayList<String>(), ArrayList<String>(), true, true, arrayListOf(DEFAULT_REPORTS), DEFAULT_SOURCE_PREFIX, DEFAULT_MIN_WARN_LEVEL)
-
     private fun asCompileArg(name: String, value: String): String = "-P:scapegoat:$name:$value"
 
     private fun asCompileArg(name: String, value: List<String>): String = "-P:scapegoat:$name:${value.joinToString(separator = ":")}"
@@ -70,11 +68,13 @@ open class ScapegoatExtension(
         }
 
         private fun create(project: Project): ScapegoatExtension {
-            return project.extensions.create(EXTENSION_NAME, ScapegoatExtension::class.java)
+            return project.extensions.run {
+                create(EXTENSION_NAME, ScapegoatExtension::class.java)
+            }
         }
 
         fun getExtension(project: Project): ScapegoatExtension {
-            return project.extensions.getByType(ScapegoatExtension::class.java)
+            return project.extensions.getByName(EXTENSION_NAME) as ScapegoatExtension
         }
 
         private fun initialize(project: Project) {

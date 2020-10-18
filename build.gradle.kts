@@ -1,8 +1,9 @@
 group = "com.github.eugenesy.scapegoat"
-version = "0.1.3"
+version = "0.1.4"
 
 plugins {
     `java-gradle-plugin`
+    `maven-publish`
 
     id("org.jetbrains.kotlin.jvm") version "1.3.41"
     id("org.jlleitschuh.gradle.ktlint") version "9.2.1"

@@ -17,10 +17,13 @@ class GradleScapegoatPlugin : Plugin<Project> {
         }
 
         val ext = ScapegoatExtension.apply(project)
-        val scapegoatConfiguration = ScapegoatConfiguration.apply(project, ext)
 
-        project.tasks.withType(ScalaCompile::class.java).configureEach {
-            it.scalaCompileOptions.additionalParameters = ext.buildCompilerArguments(scapegoatConfiguration)
+        project.afterEvaluate {
+            val scapegoatConfiguration = ScapegoatConfiguration.apply(project, ext)
+
+            project.tasks.withType(ScalaCompile::class.java).configureEach {
+                it.scalaCompileOptions.additionalParameters = ext.buildCompilerArguments(scapegoatConfiguration)
+            }
         }
     }
 }

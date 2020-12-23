@@ -33,7 +33,7 @@ Example configuration:
 
 ```groovy
 plugins {
-  id "com.github.eugenesy.scapegoat" version "0.1.3"
+  id "com.github.eugenesy.scapegoat" version "0.1.4"
 }
 
 scapegoat {
@@ -54,7 +54,7 @@ scapegoat {
 
 ```kotlin
 plugins {
-  id("com.github.eugenesy.scapegoat") version "0.1.3"
+  id("com.github.eugenesy.scapegoat") version "0.1.4"
 }
 
 configure<com.github.eugenesy.scapegoat.ScapegoatExtension>  {

@@ -39,4 +39,6 @@ scapegoat {
   reports = ["html", "xml"]
   sourcePrefix = "src/main/scala"
   minimalWarnLevel = "info"
+  enable = true
+  testEnable = false
 }

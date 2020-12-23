@@ -22,7 +22,13 @@ class GradleScapegoatPlugin : Plugin<Project> {
             val scapegoatConfiguration = ScapegoatConfiguration.apply(project, ext)
 
             project.tasks.withType(ScalaCompile::class.java).configureEach {
-                it.scalaCompileOptions.additionalParameters = ext.buildCompilerArguments(scapegoatConfiguration)
+                if (it.name.contains("test") && ext.testEnable) {
+                    it.scalaCompileOptions.additionalParameters = ext.buildCompilerArguments(scapegoatConfiguration, true)
+                }
+
+                if (!it.name.contains("test") && ext.enable) {
+                    it.scalaCompileOptions.additionalParameters = ext.buildCompilerArguments(scapegoatConfiguration, false)
+                }
             }
         }
     }

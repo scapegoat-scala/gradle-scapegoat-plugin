@@ -13,18 +13,21 @@ open class ScapegoatExtension(
     var verbose: Boolean = true,
     var reports: List<String> = arrayListOf(DEFAULT_REPORTS),
     var sourcePrefix: String = DEFAULT_SOURCE_PREFIX,
-    var minimalWarnLevel: String = DEFAULT_MIN_WARN_LEVEL
+    var minimalWarnLevel: String = DEFAULT_MIN_WARN_LEVEL,
+    var enable: Boolean = true,
+    var testEnable: Boolean = true
 ) {
     private fun asCompileArg(name: String, value: String): String = "-P:scapegoat:$name:$value"
 
     private fun asCompileArg(name: String, value: List<String>): String = "-P:scapegoat:$name:${value.joinToString(separator = ":")}"
 
-    fun buildCompilerArguments(configuration: Configuration): List<String> {
+    fun buildCompilerArguments(configuration: Configuration, forTest: Boolean): List<String> {
         val arguments: MutableList<String> = ArrayList()
         arguments.add("-Xplugin:${configuration.asPath}")
         arguments.add(asCompileArg(VERBOSE, verbose.toString()))
         arguments.add(asCompileArg(CONSOLE_OUTPUT, consoleOutput.toString()))
-        arguments.add(asCompileArg(DATA_DIR, dataDir))
+        val reportDir = if (!forTest) dataDir else dataDir + "-test"
+        arguments.add(asCompileArg(DATA_DIR, reportDir))
         if (disabledInspections.isNotEmpty()) {
             arguments.add(asCompileArg(DISABLED_INSPECTIONS, disabledInspections))
         }
@@ -51,6 +54,8 @@ open class ScapegoatExtension(
         const val REPORTS = "reports"
         const val SOURCE_PREFIX = "sourcePrefix"
         const val MINIMAL_WARN_LEVEL = "minimalWarnLevel"
+        const val ENABLE = "enable"
+        const val TEST_ENABLE = "testEnable"
 
         const val DEFAULT_SCAPEGOAT_VERSION = "1.4.4"
         const val DEFAULT_SCALA_VERSION = "2.12.10"
@@ -89,6 +94,9 @@ open class ScapegoatExtension(
             extension.reports = resolveValue<List<String>>(project, REPORTS, arrayListOf(DEFAULT_REPORTS))
             extension.sourcePrefix = resolveValue<String>(project, SOURCE_PREFIX, DEFAULT_SOURCE_PREFIX)
             extension.minimalWarnLevel = resolveValue<String>(project, MINIMAL_WARN_LEVEL, DEFAULT_MIN_WARN_LEVEL)
+            val enabled = resolveValue<Boolean>(project, ENABLE, true)
+            extension.enable = enabled
+            extension.testEnable = resolveValue<Boolean>(project, TEST_ENABLE, enabled)
         }
 
         fun apply(project: Project): ScapegoatExtension {

@@ -21,7 +21,9 @@ Configuration options are:
 * `verbose` - a flag enabling verbose output of the compiler plugin, optional, default value: `true`
 * `reports` - list of report types created during compilation, optional, default value: `all`
 * `sourcePrefix` - , optional, default value: `src/main/scala`
-* `minimalWarnLevel` - minimal level of inspections added to the report, optional, default value: `info`. 
+* `minimalWarnLevel` - minimal level of inspections added to the report, optional, default value: `info`.
+* `enable` - enables plugin for build and buildTest actions, default value: `true`
+* `testEnable` - enables plugin for buildTest actions, can overwrite `enable` flag, default value: `true`
 
 For the full list of available inspections, check the corresponding [Scapegoat README section](https://github.com/sksamuel/scapegoat#inspections).
 
@@ -45,6 +47,8 @@ scapegoat {
   reports = ["html", "xml"]
   sourcePrefix = "src/main/scala"
   minimalWarnLevel = "info"
+  enable = true
+  testEnable = true
 }
 ```
 
@@ -64,12 +68,20 @@ configure<com.github.eugenesy.scapegoat.ScapegoatExtension>  {
     reports = arrayListOf<String>("html", "xml")
     sourcePrefix = "src/main/scala"
     minimalWarnLevel = "info"
+    enable = true
+    testEnable = true
 }
 ```
 
 For more details, check [examples](./example).
 
 ## Changelog
+
+#### 0.1.4
+
+* Fixed a problem with `scalaVersion` and `scapegoatVersion` parameters.
+* Added configuration option to enable plugin for sources and tests separately.
+* Reports for test tasks are stored in a separate directory.
 
 #### 0.1.3
 

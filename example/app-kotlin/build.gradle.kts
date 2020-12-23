@@ -22,7 +22,7 @@ buildscript {
         mavenLocal()
     }
     dependencies {
-        classpath("com.github.eugenesy.scapegoat:gradle-scapegoat-plugin:0.1.3")
+        classpath("com.github.eugenesy.scapegoat:gradle-scapegoat-plugin:0.1.4")
     }
 }
 
@@ -39,4 +39,6 @@ configure<com.github.eugenesy.scapegoat.ScapegoatExtension>  {
     reports = arrayListOf<String>("html", "xml")
     sourcePrefix = "src/main/scala"
     minimalWarnLevel = "info"
+    enable = true
+    testEnable = false
 }

@@ -16,7 +16,7 @@ class ScapegoatExtensionTest {
         (project as ProjectInternal).evaluate()
 
         val cfg = project.buildscript.configurations.findByName("scalaScapegoatCompilerPlugin")!!
-        val args = ext.buildCompilerArguments(cfg)
+        val args = ext.buildCompilerArguments(cfg, false)
         assertTrue(args.contains("-Xplugin:${cfg.asPath}"), "Does not contain Scapegoat classpath")
         assertTrue(args.contains("-P:scapegoat:verbose:true"), "Does not contain verbose")
         assertTrue(args.contains("-P:scapegoat:consoleOutput:true"), "Does not contain consoleOutput")
@@ -37,7 +37,7 @@ class ScapegoatExtensionTest {
         (project as ProjectInternal).evaluate()
 
         val cfg = project.buildscript.configurations.findByName("scalaScapegoatCompilerPlugin")!!
-        val args = ext.buildCompilerArguments(cfg)
+        val args = ext.buildCompilerArguments(cfg, false)
         assertTrue(args.contains("-P:scapegoat:disabledInspections:${inspections.joinToString(separator = ":")}"), "disabledInspections are not converted correctly")
     }
 
@@ -53,7 +53,7 @@ class ScapegoatExtensionTest {
         (project as ProjectInternal).evaluate()
 
         val cfg = project.buildscript.configurations.findByName("scalaScapegoatCompilerPlugin")!!
-        val args = ext.buildCompilerArguments(cfg)
+        val args = ext.buildCompilerArguments(cfg, false)
         assertTrue(args.contains("-P:scapegoat:ignoredFiles:${ignoredFiles.joinToString(separator = ":")}"), "ignoredFiles are not converted correctly")
     }
 
@@ -69,7 +69,7 @@ class ScapegoatExtensionTest {
         (project as ProjectInternal).evaluate()
 
         val cfg = project.buildscript.configurations.findByName("scalaScapegoatCompilerPlugin")!!
-        val args = ext.buildCompilerArguments(cfg)
+        val args = ext.buildCompilerArguments(cfg, false)
         println(args)
         assertTrue(args.contains("-P:scapegoat:reports:${reports.joinToString(separator = ":")}"), "reports are not converted correctly")
     }

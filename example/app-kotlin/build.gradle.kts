@@ -5,7 +5,7 @@ plugins {
 }
 
 repositories {
-    jcenter()
+    mavenCentral()
 }
 
 dependencies {
@@ -18,11 +18,11 @@ application {
 
 buildscript {
     repositories {
-        jcenter()
+        mavenCentral()
         mavenLocal()
     }
     dependencies {
-        classpath("com.github.eugenesy.scapegoat:gradle-scapegoat-plugin:0.1.4")
+        classpath("com.github.eugenesy.scapegoat:gradle-scapegoat-plugin:0.2.0")
     }
 }
 

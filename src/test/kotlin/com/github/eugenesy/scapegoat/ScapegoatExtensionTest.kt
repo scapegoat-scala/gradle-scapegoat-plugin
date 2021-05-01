@@ -10,9 +10,9 @@ class ScapegoatExtensionTest {
     fun `extension parameters can be converted to scala compiler arguments`() {
         val ext = ScapegoatExtension()
         val project = ProjectBuilder.builder().build()
-        project.repositories.add(project.repositories.jcenter())
+        project.repositories.add(project.repositories.mavenCentral())
         project.plugins.apply("com.github.eugenesy.scapegoat")
-        project.buildscript.repositories.add(project.repositories.jcenter())
+        project.buildscript.repositories.add(project.repositories.mavenCentral())
         (project as ProjectInternal).evaluate()
 
         val cfg = project.buildscript.configurations.findByName("scalaScapegoatCompilerPlugin")!!
@@ -31,9 +31,9 @@ class ScapegoatExtensionTest {
         val inspections = arrayListOf("ArrayEquals", "AvoidToMinusOne")
         ext.disabledInspections = inspections
         val project = ProjectBuilder.builder().build()
-        project.repositories.add(project.repositories.jcenter())
+        project.repositories.add(project.repositories.mavenCentral())
         project.pluginManager.apply("com.github.eugenesy.scapegoat")
-        project.buildscript.repositories.add(project.repositories.jcenter())
+        project.buildscript.repositories.add(project.repositories.mavenCentral())
         (project as ProjectInternal).evaluate()
 
         val cfg = project.buildscript.configurations.findByName("scalaScapegoatCompilerPlugin")!!
@@ -47,9 +47,9 @@ class ScapegoatExtensionTest {
         val ignoredFiles = arrayListOf("src/file1", "src/file2")
         ext.ignoredFiles = ignoredFiles
         val project = ProjectBuilder.builder().build()
-        project.repositories.add(project.repositories.jcenter())
+        project.repositories.add(project.repositories.mavenCentral())
         project.plugins.apply("com.github.eugenesy.scapegoat")
-        project.buildscript.repositories.add(project.repositories.jcenter())
+        project.buildscript.repositories.add(project.repositories.mavenCentral())
         (project as ProjectInternal).evaluate()
 
         val cfg = project.buildscript.configurations.findByName("scalaScapegoatCompilerPlugin")!!
@@ -63,9 +63,9 @@ class ScapegoatExtensionTest {
         val reports = arrayListOf("html", "xml")
         ext.reports = reports
         val project = ProjectBuilder.builder().build()
-        project.repositories.add(project.repositories.jcenter())
+        project.repositories.add(project.repositories.mavenCentral())
         project.plugins.apply("com.github.eugenesy.scapegoat")
-        project.buildscript.repositories.add(project.repositories.jcenter())
+        project.buildscript.repositories.add(project.repositories.mavenCentral())
         (project as ProjectInternal).evaluate()
 
         val cfg = project.buildscript.configurations.findByName("scalaScapegoatCompilerPlugin")!!

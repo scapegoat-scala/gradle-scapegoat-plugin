@@ -75,6 +75,17 @@ configure<com.github.eugenesy.scapegoat.ScapegoatExtension>  {
 
 For more details, check [examples](./example).
 
+
+## Compatibility
+
+The plugin is dependent on Kotlin runtime, provided by Gradle.
+Kotlin API 1.3 is deprecated and is being removed soon.
+
+|Plugin version|Min Gradle Version|Kotlin API|
+|:------------:|:----------------:|:--------:|
+|0.1.4         |5.3               |1.3       |
+|0.2.0         |6.5               |1.4       |
+
 ## Changelog
 
 #### 0.1.4

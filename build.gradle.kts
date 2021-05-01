@@ -1,17 +1,17 @@
 group = "com.github.eugenesy.scapegoat"
-version = "0.1.4"
+version = "0.2.0"
 
 plugins {
     `java-gradle-plugin`
     `maven-publish`
 
-    id("org.jetbrains.kotlin.jvm") version "1.3.41"
+    id("org.jetbrains.kotlin.jvm") version "1.4.31"
     id("org.jlleitschuh.gradle.ktlint") version "10.0.0"
     id("com.gradle.plugin-publish") version "0.14.0"
 }
 
 repositories {
-    jcenter()
+    mavenCentral()
 }
 
 dependencies {
@@ -47,8 +47,8 @@ val check by tasks.getting(Task::class) {
 }
 
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
-    // This is the version used in Gradle 5.2
-    kotlinOptions.apiVersion = "1.3"
+    // This is the version used in Gradle 6.5
+    kotlinOptions.apiVersion = "1.4"
 
     kotlinOptions.allWarningsAsErrors = true
 }

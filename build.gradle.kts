@@ -1,5 +1,5 @@
 group = "com.github.eugenesy.scapegoat"
-version = "0.1.4"
+version = "0.2.0"
 
 plugins {
     `java-gradle-plugin`
@@ -11,7 +11,7 @@ plugins {
 }
 
 repositories {
-    jcenter()
+    mavenCentral()
 }
 
 dependencies {

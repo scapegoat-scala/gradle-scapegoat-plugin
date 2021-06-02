@@ -57,8 +57,8 @@ open class ScapegoatExtension(
         const val ENABLE = "enable"
         const val TEST_ENABLE = "testEnable"
 
-        const val DEFAULT_SCAPEGOAT_VERSION = "1.4.4"
-        const val DEFAULT_SCALA_VERSION = "2.12.10"
+        const val DEFAULT_SCAPEGOAT_VERSION = "1.4.8"
+        const val DEFAULT_SCALA_VERSION = "2.12.13"
         const val DEFAULT_REPORTS = "all"
         const val DEFAULT_SOURCE_PREFIX = "src/main/scala"
         const val DEFAULT_REPORTS_PATH = "reports/scapegoat"

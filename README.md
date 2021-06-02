@@ -33,12 +33,12 @@ Example configuration:
 
 ```groovy
 plugins {
-  id "com.github.eugenesy.scapegoat" version "0.1.4"
+  id "com.github.eugenesy.scapegoat" version "0.2.0"
 }
 
 scapegoat {
-  scapegoatVersion = "1.4.4"
-  scalaVersion = "2.12.10"
+  scapegoatVersion = "1.4.8"
+  scalaVersion = "2.12.13"
   dataDir = "${buildDir}/reports/scapegoat"
   disabledInspections = []
   ignoredFiles = []
@@ -54,12 +54,12 @@ scapegoat {
 
 ```kotlin
 plugins {
-  id("com.github.eugenesy.scapegoat") version "0.1.4"
+  id("com.github.eugenesy.scapegoat") version "0.2.0"
 }
 
 configure<com.github.eugenesy.scapegoat.ScapegoatExtension>  {
-    scapegoatVersion = "1.4.4"
-    scalaVersion = "2.12.10"
+    scapegoatVersion = "1.4.8"
+    scalaVersion = "2.12.13"
     dataDir = "${buildDir}/reports/scapegoat"
     disabledInspections = arrayListOf("ArrayEquals", "AvoidToMinusOne")
     ignoredFiles = emptyArray<String>().toList()
@@ -81,12 +81,18 @@ For more details, check [examples](./example).
 The plugin is dependent on Kotlin runtime, provided by Gradle.
 Kotlin API 1.3 is deprecated and is being removed soon.
 
-|Plugin version|Min Gradle Version|Kotlin API|
-|:------------:|:----------------:|:--------:|
-|0.1.4         |5.3               |1.3       |
-|0.2.0         |6.5               |1.4       |
+|Plugin version|Minimal Gradle Version|Kotlin API|
+|:------------:|:--------------------:|:--------:|
+|0.1.4         |5.3                   |1.3       |
+|0.2.0         |6.5                   |1.4       |
 
 ## Changelog
+
+#### 0.2.0
+
+* Drop support of Gradle versions from `5.3` to `6.5`
+* Kotlin runtime upgrade
+* Scapegoat default version update to `1.4.8` and Scala version to `2.12.13`
 
 #### 0.1.4
 

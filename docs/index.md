@@ -1,3 +1,9 @@
+---
+title: Gradle Scapegoat Plugin
+permalink: '/index.html'
+layout: default
+---
+
 # Gradle Scapegoat Plugin
 
 [![CircleCI](https://circleci.com/gh/eugene-sy/gradle-scapegoat-plugin.svg?style=shield)](https://circleci.com/gh/eugene-sy/gradle-scapegoat-plugin)

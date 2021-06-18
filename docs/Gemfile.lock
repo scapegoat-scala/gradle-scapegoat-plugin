@@ -1,6 +1,6 @@
 GIT
   remote: git@github.com:eugene-sy/jekyll-theme-eugene-sy.git
-  revision: 10b5fe153965923c0591323ba60e3f57deaf56c5
+  revision: f5d8a42dec15be5149f4441f8d3b6d323d91ec8f
   specs:
     jekyll-theme-eugene-sy (0.1.0)
       jekyll

@@ -10,7 +10,6 @@ github_username: eugene-sy
 
 project: gradle-scapegoat-plugin
 project_url: /gradle-scapegoat-plugin
-context: /gradle-scapegoat-plugin
 
 # Build settings
 markdown: kramdown

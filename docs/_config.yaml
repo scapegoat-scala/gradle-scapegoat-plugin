@@ -1,5 +1,3 @@
-theme: jekyll-theme-eugene-sy
-
 # Site settings
 title: eugene-sy.github.io
 email: eugene.sypachev@gmail.com
@@ -14,6 +12,7 @@ project_url: /gradle-scapegoat-plugin
 # Build settings
 markdown: kramdown
 permalink: pretty
+remote_theme: eugene-sy/jekyll-theme-eugene-sy
 
 #contacts
 git: 'https://github.com/eugene-sy'

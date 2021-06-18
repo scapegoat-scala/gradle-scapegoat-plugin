@@ -1,0 +1,18 @@
+# Site settings
+title: eugene-sy.github.io
+email: eugene.sypachev@gmail.com
+baseurl: ''
+url: 'https://eugene-sy.github.io'
+username: 'Eugene Sypachev'
+github_username: eugene-sy
+
+project: gradle-scapegoat-plugin
+project_url: /gradle-scapegoat-plugin
+
+# Build settings
+markdown: kramdown
+permalink: pretty
+
+#contacts
+git: 'https://github.com/eugene-sy'
+linkedin: 'https://www.linkedin.com/pub/eugene-sypachev/50/780/ab2'

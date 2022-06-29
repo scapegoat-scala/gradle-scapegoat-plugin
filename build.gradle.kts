@@ -7,7 +7,7 @@ plugins {
 
     id("org.jetbrains.kotlin.jvm") version "1.4.31"
     id("org.jlleitschuh.gradle.ktlint") version "10.1.0"
-    id("com.gradle.plugin-publish") version "0.16.0"
+    id("com.gradle.plugin-publish") version "1.0.0"
 }
 
 repositories {
